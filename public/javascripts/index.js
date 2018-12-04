@@ -100,6 +100,8 @@ $(document).ready(function () {
 
       $('#lat').text(lat);
       $('#long').text(long);
+      $('#latlong').text(lat+','+long);
+      $('#maps').attr('href', 'https://www.google.com/maps/search/?api=1&query='+lat+','+long)
       myLineChart.update();
     } catch (err) {
       console.error(err);
