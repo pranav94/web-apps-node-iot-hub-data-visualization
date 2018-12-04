@@ -58,8 +58,10 @@ $(document).ready(function () {
   }
 
   //Get the context of the canvas element we want to select
+  var lat = 0;
+  var long = 0;
   var ctx = document.getElementById("myChart").getContext("2d");
-  var optionsNoAnimation = { animation: false }
+  var optionsNoAnimation = { animation: true }
   var myLineChart = new Chart(ctx, {
     type: 'line',
     data: data,
@@ -74,9 +76,11 @@ $(document).ready(function () {
     console.log('receive message' + message.data);
     try {
       var obj = JSON.parse(message.data);
-      if(!obj.time || !obj.temperature) {
+      if(!obj.time || !obj.temperature || !obj.lat || !obj.long) {
         return;
       }
+      lat = obj.lat;
+      long = obj.long;
       timeData.push(obj.time);
       temperatureData.push(obj.temperature);
       // only keep no more than 50 points in the line chart
@@ -94,6 +98,8 @@ $(document).ready(function () {
         humidityData.shift();
       }
 
+      $('#lat').text(lat);
+      $('#long').text(long);
       myLineChart.update();
     } catch (err) {
       console.error(err);
