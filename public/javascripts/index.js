@@ -24,8 +24,8 @@ $(document).ready(function () {
     datasets: [
       {
         fill: false,
-        label: 'Temperature',
-        yAxisID: 'Temperature',
+        label: 'Humidity',
+        yAxisID: 'Humidity',
         borderColor: "rgba(255, 204, 0, 1)",
         pointBoarderColor: "rgba(255, 204, 0, 1)",
         backgroundColor: "rgba(255, 204, 0, 0.4)",
@@ -40,8 +40,8 @@ $(document).ready(function () {
     datasets: [
       {
         fill: false,
-        label: 'Temperature',
-        yAxisID: 'Temperature',
+        label: 'CO Level',
+        yAxisID: 'COLevel',
         borderColor: "rgba(255, 204, 0, 1)",
         pointBoarderColor: "rgba(255, 204, 0, 1)",
         backgroundColor: "rgba(255, 204, 0, 0.4)",
@@ -75,7 +75,7 @@ $(document).ready(function () {
     title: {
       display: true,
       text: 'Humidity',
-      fontSize: 36
+      fontSize: 36  
     },
     scales: {
       yAxes: [{
@@ -98,7 +98,7 @@ $(document).ready(function () {
     },
     scales: {
       yAxes: [{
-        id: 'CO Levels',
+        id: 'COLevel',
         type: 'linear',
         scaleLabel: {
           labelString: 'CO Levels(ppm)',
@@ -175,8 +175,8 @@ $(document).ready(function () {
       $('#latlong').text(lat+','+long);
       $('#maps').attr('href', 'https://www.google.com/maps/search/?api=1&query='+lat+','+long);
       $('#co').text(co + ' ppm');
-      tChart.update();
-      hChart.update();
+      // tChart.update();
+      // hChart.update();
       cChart.update();
     } catch (err) {
       console.error(err);
