@@ -3,7 +3,7 @@ $(document).ready(function () {
     temperatureData = [],
     humidityData = [],
     coData = [];
-  var data = {
+  var tData = {
     labels: timeData,
     datasets: [
       {
@@ -16,36 +16,46 @@ $(document).ready(function () {
         pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
         pointHoverBorderColor: "rgba(255, 204, 0, 1)",
         data: temperatureData
-      },
+      }
+    ]
+  }
+  var hData = {
+    labels: timeData,
+    datasets: [
       {
         fill: false,
-        label: 'Humidity',
-        yAxisID: 'Humidity',
-        borderColor: "rgba(24, 120, 240, 1)",
-        pointBoarderColor: "rgba(24, 120, 240, 1)",
-        backgroundColor: "rgba(24, 120, 240, 0.4)",
-        pointHoverBackgroundColor: "rgba(24, 120, 240, 1)",
-        pointHoverBorderColor: "rgba(24, 120, 240, 1)",
+        label: 'Temperature',
+        yAxisID: 'Temperature',
+        borderColor: "rgba(255, 204, 0, 1)",
+        pointBoarderColor: "rgba(255, 204, 0, 1)",
+        backgroundColor: "rgba(255, 204, 0, 0.4)",
+        pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
+        pointHoverBorderColor: "rgba(255, 204, 0, 1)",
         data: humidityData
-      },
+      }
+    ]
+  }
+  var cData = {
+    labels: timeData,
+    datasets: [
       {
         fill: false,
-        label: 'CO Levels',
-        yAxisID: 'CO Levels',
-        borderColor: "rgba(54, 30, 24, 1)",
-        pointBoarderColor: "rgba(54, 30, 24, 1)",
-        backgroundColor: "rgba(54, 30, 24, 0.4)",
-        pointHoverBackgroundColor: "rgba(54, 30, 24, 1)",
-        pointHoverBorderColor: "rgba(54, 30, 24, 1)",
+        label: 'Temperature',
+        yAxisID: 'Temperature',
+        borderColor: "rgba(255, 204, 0, 1)",
+        pointBoarderColor: "rgba(255, 204, 0, 1)",
+        backgroundColor: "rgba(255, 204, 0, 0.4)",
+        pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
+        pointHoverBorderColor: "rgba(255, 204, 0, 1)",
         data: coData
       }
     ]
   }
 
-  var basicOption = {
+  var tOption = {
     title: {
       display: true,
-      text: 'Temperature, Humidity and CO levels',
+      text: 'Temperature',
       fontSize: 36
     },
     scales: {
@@ -57,21 +67,45 @@ $(document).ready(function () {
           display: true
         },
         position: 'left',
-      }, {
-          id: 'Humidity',
-          type: 'linear',
-          scaleLabel: {
-            labelString: 'Humidity(%)',
-            display: true
-          }
-        }, {
-          id: 'CO Levels',
-          type: 'linear',
-          scaleLabel: {
-            labelString: 'CO(ppm)',
-            display: true
-          }
-        }]
+      }]
+    }
+  }
+
+  var hOption = {
+    title: {
+      display: true,
+      text: 'Humidity',
+      fontSize: 36
+    },
+    scales: {
+      yAxes: [{
+        id: 'Humidity',
+        type: 'linear',
+        scaleLabel: {
+          labelString: 'Humidity(%)',
+          display: true
+        },
+        position: 'left',
+      }]
+    }
+  }
+
+  var cOption = {
+    title: {
+      display: true,
+      text: 'CO Levels',
+      fontSize: 36
+    },
+    scales: {
+      yAxes: [{
+        id: 'CO Levels',
+        type: 'linear',
+        scaleLabel: {
+          labelString: 'CO Levels(ppm)',
+          display: true
+        },
+        position: 'left',
+      }]
     }
   }
 
@@ -79,12 +113,23 @@ $(document).ready(function () {
   var lat = 0;
   var long = 0;
   var co = '-';
-  var ctx = document.getElementById("myChart").getContext("2d");
-  var optionsNoAnimation = { animation: true }
-  var myLineChart = new Chart(ctx, {
+  var tctx = document.getElementById("temp").getContext("2d");
+  var hctx = document.getElementById("temp").getContext("2d");
+  var cctx = document.getElementById("temp").getContext("2d");
+  var tChart = new Chart(tctx, {
     type: 'line',
-    data: data,
-    options: basicOption
+    data: tData,
+    options: tOption
+  });
+  var hChart = new Chart(hctx, {
+    type: 'line',
+    data: hData,
+    options: hOption
+  });
+  var cChart = new Chart(cctx, {
+    type: 'line',
+    data: cData,
+    options: cOption
   });
 
   var ws = new WebSocket('wss://' + location.host);
@@ -130,7 +175,9 @@ $(document).ready(function () {
       $('#latlong').text(lat+','+long);
       $('#maps').attr('href', 'https://www.google.com/maps/search/?api=1&query='+lat+','+long);
       $('#co').text(co + ' ppm');
-      myLineChart.update();
+      tChart.update();
+      hChart.update();
+      cChart.update();
     } catch (err) {
       console.error(err);
     }
