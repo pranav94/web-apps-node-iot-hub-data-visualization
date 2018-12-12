@@ -60,6 +60,7 @@ $(document).ready(function () {
   //Get the context of the canvas element we want to select
   var lat = 0;
   var long = 0;
+  var co = '-';
   var ctx = document.getElementById("myChart").getContext("2d");
   var optionsNoAnimation = { animation: true }
   var myLineChart = new Chart(ctx, {
@@ -81,6 +82,7 @@ $(document).ready(function () {
       }
       lat = obj.lat;
       long = obj.long;
+      co = obj.co;
       timeData.push(obj.time);
       temperatureData.push(obj.temperature);
       // only keep no more than 50 points in the line chart
@@ -101,7 +103,8 @@ $(document).ready(function () {
       $('#lat').text(lat);
       $('#long').text(long);
       $('#latlong').text(lat+','+long);
-      $('#maps').attr('href', 'https://www.google.com/maps/search/?api=1&query='+lat+','+long)
+      $('#maps').attr('href', 'https://www.google.com/maps/search/?api=1&query='+lat+','+long);
+      $('#co').text(co);
       myLineChart.update();
     } catch (err) {
       console.error(err);
