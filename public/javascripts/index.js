@@ -114,8 +114,8 @@ $(document).ready(function () {
   var long = 0;
   var co = '-';
   var tctx = document.getElementById("temp").getContext("2d");
-  var hctx = document.getElementById("temp").getContext("2d");
-  var cctx = document.getElementById("temp").getContext("2d");
+  var hctx = document.getElementById("hum").getContext("2d");
+  var cctx = document.getElementById("cog").getContext("2d");
   var tChart = new Chart(tctx, {
     type: 'line',
     data: tData,
