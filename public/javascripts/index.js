@@ -1,7 +1,8 @@
 $(document).ready(function () {
   var timeData = [],
     temperatureData = [],
-    humidityData = [];
+    humidityData = [],
+    coData = [];
   var data = {
     labels: timeData,
     datasets: [
@@ -26,6 +27,17 @@ $(document).ready(function () {
         pointHoverBackgroundColor: "rgba(24, 120, 240, 1)",
         pointHoverBorderColor: "rgba(24, 120, 240, 1)",
         data: humidityData
+      },
+      {
+        fill: false,
+        label: 'CO Levels',
+        yAxisID: 'CO Levels',
+        borderColor: "rgba(54, 30, 24, 1)",
+        pointBoarderColor: "rgba(54, 30, 24, 1)",
+        backgroundColor: "rgba(54, 30, 24, 0.4)",
+        pointHoverBackgroundColor: "rgba(54, 30, 24, 1)",
+        pointHoverBorderColor: "rgba(54, 30, 24, 1)",
+        data: coData
       }
     ]
   }
@@ -33,7 +45,7 @@ $(document).ready(function () {
   var basicOption = {
     title: {
       display: true,
-      text: 'Temperature & Humidity Real-time Data',
+      text: 'Temperature, Humidity and CO levels',
       fontSize: 36
     },
     scales: {
@@ -51,8 +63,14 @@ $(document).ready(function () {
           scaleLabel: {
             labelString: 'Humidity(%)',
             display: true
-          },
-          position: 'right'
+          }
+        }, {
+          id: 'CO Levels',
+          type: 'linear',
+          scaleLabel: {
+            labelString: 'CO(ppm)',
+            display: true
+          }
         }]
     }
   }
@@ -100,11 +118,18 @@ $(document).ready(function () {
         humidityData.shift();
       }
 
+      if (obj.co) {
+        coData.push(obj.co);
+      }
+      if (coData.length > maxLen) {
+        coData.shift();
+      }
+
       $('#lat').text(lat);
       $('#long').text(long);
       $('#latlong').text(lat+','+long);
       $('#maps').attr('href', 'https://www.google.com/maps/search/?api=1&query='+lat+','+long);
-      $('#co').text(co);
+      $('#co').text(co + ' ppm');
       myLineChart.update();
     } catch (err) {
       console.error(err);
