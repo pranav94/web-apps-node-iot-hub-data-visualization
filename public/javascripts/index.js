@@ -185,8 +185,8 @@ $(document).ready(function () {
       $('#latlong').text(lat+','+long);
       $('#maps').attr('href', 'https://www.google.com/maps/search/?api=1&query='+lat+','+long);
       $('#co').text(co + ' ppm');
-      // tChart.update();
-      // hChart.update();
+      tChart.update();
+      hChart.update();
       cChart.update();
     } catch (err) {
       console.error(err);
