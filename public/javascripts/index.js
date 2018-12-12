@@ -177,6 +177,9 @@ $(document).ready(function () {
       } else {
         $('.alert').hide();
       }
+      $('#temptext').text(obj.temperature);
+      $('#humtext').text(obj.humidity);
+      $('#long').text(long);
       $('#lat').text(lat);
       $('#long').text(long);
       $('#latlong').text(lat+','+long);
