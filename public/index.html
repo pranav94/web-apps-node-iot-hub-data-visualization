@@ -10,20 +10,27 @@
 
 <body>
     <div>
-        <div style="display:inline-block;max-width:33%"><canvas id="temp" width="400" height="150"></canvas></div>
-        <div style="display:inline-block;max-width:33%"><canvas id="hum" width="400" height="150"></canvas></div>
-        <div style="display:inline-block;max-width:33%"><canvas id="cog" width="400" height="150"></canvas></div>
+        <div style="display:inline-block"><canvas id="temp" width="420" height="300"></canvas></div>
+        <div style="display:inline-block"><canvas id="hum" width="420" height="300"></canvas></div>
+        <div style="display:inline-block"><canvas id="cog" width="420" height="300"></canvas></div>
+    </div>
+    <div class="alert">
+        Emergency! Fire alert!
+    </div>
+    <div>
+        Temperature: <span id='temptext'>-</span>&nbsp;
+        Humidity: <span id='humtext'>-</span>&nbsp;
     </div>
     <div>
         Latitude: <span id='lat'></span>&nbsp;
         Longitude: <span id='long'></span>
     </div>
     <div>
-        Open in Google Maps: 
-        <a  target="_blank" id='maps' href='https://www.google.com/maps/search/?api=1&query='>https://www.google.com/maps/search/?api=1&query=<span id='latlong'>33.67027,-117.8271</span></a>
+        CO Levels: <span id="co">-</span>
     </div>
     <div>
-        CO Levels: <span id="co">-</span>
+        Open in Google Maps: 
+        <a  target="_blank" id='maps' href='https://www.google.com/maps/search/?api=1&query='>https://www.google.com/maps/search/?api=1&query=<span id='latlong'>33.67027,-117.8271</span></a>
     </div>
 </body>
 

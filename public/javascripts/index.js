@@ -10,11 +10,11 @@ $(document).ready(function () {
         fill: false,
         label: 'Temperature',
         yAxisID: 'Temperature',
-        borderColor: "rgba(255, 204, 0, 1)",
-        pointBoarderColor: "rgba(255, 204, 0, 1)",
-        backgroundColor: "rgba(255, 204, 0, 0.4)",
-        pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
-        pointHoverBorderColor: "rgba(255, 204, 0, 1)",
+        borderColor: "rgba(230, 126, 34, 1.0)",
+        pointBoarderColor: "rgba(230, 126, 34, 1.0)",
+        backgroundColor: "rgba(230, 126, 34, 0.4)",
+        pointHoverBackgroundColor: "rgba(230, 126, 34, 1.0)",
+        pointHoverBorderColor: "rgba(230, 126, 34, 1.0)",
         data: temperatureData
       }
     ]
@@ -26,11 +26,11 @@ $(document).ready(function () {
         fill: false,
         label: 'Humidity',
         yAxisID: 'Humidity',
-        borderColor: "rgba(255, 204, 0, 1)",
-        pointBoarderColor: "rgba(255, 204, 0, 1)",
-        backgroundColor: "rgba(255, 204, 0, 0.4)",
-        pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
-        pointHoverBorderColor: "rgba(255, 204, 0, 1)",
+        borderColor: "rgba(41, 128, 185, 1.0)",
+        pointBoarderColor: "rgba(41, 128, 185, 1.0)",
+        backgroundColor: "rgba(41, 128, 185, 0.4)",
+        pointHoverBackgroundColor: "rgba(41, 128, 185, 1.0)",
+        pointHoverBorderColor: "rgba(41, 128, 185, 1.0)",
         data: humidityData
       }
     ]
@@ -42,11 +42,11 @@ $(document).ready(function () {
         fill: false,
         label: 'CO Level',
         yAxisID: 'COLevel',
-        borderColor: "rgba(255, 204, 0, 1)",
-        pointBoarderColor: "rgba(255, 204, 0, 1)",
-        backgroundColor: "rgba(255, 204, 0, 0.4)",
-        pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
-        pointHoverBorderColor: "rgba(255, 204, 0, 1)",
+        borderColor: "rgba(52, 73, 94, 1.0)",
+        pointBoarderColor: "rgba(52, 73, 94, 1.0)",
+        backgroundColor: "rgba(52, 73, 94, 0.4)",
+        pointHoverBackgroundColor: "rgba(52, 73, 94, 1.0)",
+        pointHoverBorderColor: "rgba(52, 73, 94, 1.0)",
         data: coData
       }
     ]
@@ -113,6 +113,7 @@ $(document).ready(function () {
   var lat = 0;
   var long = 0;
   var co = '-';
+  var fire = 0;
   var tctx = document.getElementById("temp").getContext("2d");
   var hctx = document.getElementById("hum").getContext("2d");
   var cctx = document.getElementById("cog").getContext("2d");
@@ -169,7 +170,13 @@ $(document).ready(function () {
       if (coData.length > maxLen) {
         coData.shift();
       }
+      fire = obj.fire;
 
+      if (fire == 1) {
+        $('.alert').show();
+      } else {
+        $('.alert').hide();
+      }
       $('#lat').text(lat);
       $('#long').text(long);
       $('#latlong').text(lat+','+long);
